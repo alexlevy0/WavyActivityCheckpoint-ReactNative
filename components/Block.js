@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import blockConfigNew from './blockConfigNew'
+import blockConfig from './blockConfig'
 
 const BlockStateLess = props => {
-    const blockConf = new blockConfigNew(props)
-    return <View style={ blockConf } />
+    return <View style={ new blockConfig(props) } />
 }
-
 export default BlockStateLess
