@@ -1,7 +1,8 @@
 import { StatusBar } from 'react-native'
 
 
-const FacebookBlue = `#3B5998`
+const FacebookBlue = `#4569b2`
+const FacebookBlueLite = `#3B5998`
 
 export default {
     container: {
@@ -15,6 +16,7 @@ export default {
       backgroundColor: FacebookBlue,
       color: '#FFFFFF'
     },
+    FacebookBlue : FacebookBlue,
     input: {
       height: 40,
       borderColor: 'gray',

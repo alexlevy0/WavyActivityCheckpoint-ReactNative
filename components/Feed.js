@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    View, Text, StyleSheet, FlatList, ScrollView
+    View, Text, StyleSheet, FlatList, ScrollView, Image
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
@@ -8,7 +8,6 @@ import style from '../Styles'
 import Card from './Card'
 import Bubble from './Bubble'
 
-// export default class Feed extends React.Component {
 class Feed extends React.Component {
 
     render() {
@@ -33,18 +32,18 @@ class Feed extends React.Component {
             </View>
         )
     }
-
 }
 
 const navigationOptions = {
-    headerStyle: style.header,
-    headerTitleStyle: style.headerTitle,
-    title: 'Feed'
+    header: null,
+    tabBarIcon: () => (<Image source={require('./icons/feed.png')} style={{ width: 50, height: 50 }} />),
 }
 
 export default StackNavigator({
     Feed: {
         screen: Feed,
-        navigationOptions
+        navigationOptions,
+        headerMode: 'none',
+        header: null,
     }
 })

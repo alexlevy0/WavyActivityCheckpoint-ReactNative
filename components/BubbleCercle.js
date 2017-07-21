@@ -20,8 +20,27 @@ export default class BubbleCercle extends React.Component {
                     </View>
                     <View style={[localStyle.circle]}>
                     </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
+                    <View style={[localStyle.circle]}>
+                    </View>
                 </View>
-
                 <View style={[localStyle.spacer]}>
                 </View>
             </View>
@@ -37,17 +56,20 @@ const localStyle = StyleSheet.create({
         height: 50,
         width: 50,
         borderRadius: 25,
-        backgroundColor: 'whitesmoke',
+        // backgroundColor: 'whitesmoke',
+        backgroundColor: 'gainsboro',
         marginLeft: 20,
         // paddingBottom: 20,
         // paddingTop: 20,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 5
     },
     container: {
         flexDirection: 'row'
     },
     spacer: {
-        backgroundColor: 'whitesmoke',
+        // backgroundColor: 'whitesmoke',
+        backgroundColor: 'gainsboro',
         height: 5
     }
 

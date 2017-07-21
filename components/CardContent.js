@@ -7,10 +7,11 @@ export default class CardContent extends React.Component {
         // const { content } = this.props
         return (
             <View style={[localStyle.content]}>
-                {this.props.children}
+                 {this.props.children} 
                 <View style={[localStyle.marginLeft]}>
                     <View style={[localStyle.line]}></View>
-                    <View style={[localStyle.lineLite]}></View>
+                    <View style={[localStyle.line2]}></View>
+                    <View style={[localStyle.line3]}></View>
                 </View>
             </View>
         )
@@ -22,14 +23,28 @@ const localStyle = StyleSheet.create({
         marginLeft: 10
     },
     line: {
+        borderRadius: 10,
         marginTop:5,
-        width: 120,
+        width: 150,
         height: 20,
         backgroundColor: 'gainsboro',
     },
-    lineLite: {
-        width: 45,
+    line2: {
+        // height: 3,
+        borderRadius: 10,
+        width: 235,
         backgroundColor: 'gainsboro',
+        // backgroundColor: 'yellow',
+        padding: 10,
+        marginTop: 5,
+        flexDirection: 'column'
+    },
+    line3: {
+        // height: 3,
+        borderRadius: 10,
+        width: 75,
+        backgroundColor: 'gainsboro',
+        // backgroundColor: 'yellow',
         padding: 10,
         marginTop: 5,
         flexDirection: 'column'
@@ -41,6 +56,7 @@ const localStyle = StyleSheet.create({
     content: {
         paddingTop: 15,
         backgroundColor: 'white',
-        height: 100
+        height: 100,
+        // backgroundColor: 'yellow'
     }
 })

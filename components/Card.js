@@ -6,14 +6,7 @@ import CardHeader from './CardHeader'
 import CardContent from './CardContent'
 
 export default class Card extends React.Component {
-
-    contructor(props){
-        
-    }
-
     render() {
-        this.props.content
-        
         return (
             <View style={[localStyle.card]}>
                 <CardHeader ></CardHeader>
@@ -35,7 +28,7 @@ const localStyle = StyleSheet.create({
         height: 5
     },
     card: {
-        flex: 0,
+        // flex: 0,
         // backgroundColor: `#3B5998`
         backgroundColor: 'red'
     },

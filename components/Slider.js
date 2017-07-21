@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     View, Text, StyleSheet, Button, Animated,
-    Dimensions, PanResponder
+    Dimensions, PanResponder, StatusBar
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
@@ -13,15 +13,15 @@ import Switch from './Switch'
 import CardHeader from './CardHeader'
 import CardContent from './CardContent'
 
-// export default class Slider extends React.Component {
-class Slider extends React.Component {
+export default class Slider extends React.Component {
+    // class Slider extends React.Component {
 
     constructor(props) {
         super(props)
         let { width } = Dimensions.get('window')
         Dimensions.addEventListener('change', this.onResize.bind(this))
         this.state = {
-            slideLength: 2,
+            slideLength: 3,
             width: width,
             page: 0,
             translate: new Animated.Value(0)
@@ -66,6 +66,8 @@ class Slider extends React.Component {
                 toValue = this.state.width
                 console.log("KO /!\\ ", toValue)
             }
+        } else {
+
         }
         console.log("toValue ---> ", toValue)
         this.state.translate.setValue(0)
@@ -88,6 +90,45 @@ class Slider extends React.Component {
         this.setState({ page })
     }
 
+    nextPageManuel() {
+        let page = this.state.page + 1
+        page >= this.state.slideLength ? page = 0 : true
+        console.log("Go Page :", page)
+        this.setState({ page })
+        // const toValue = this.state.width * -1
+        const toValue = this.state.width * -1 * this.state.page
+
+        Animated.timing(
+            this.state.translate,
+            {
+                toValue: toValue,
+                duration: 1000,
+                useNativeDriver: true
+            }
+        ).start()
+        this.state.translate.setValue(0)
+
+    }
+
+    prevPageManuel() {
+        let page = this.state.page - 1
+        page < 0 ? page = this.state.slideLength : true
+        console.log("Prev Page : ", page)
+        this.setState({ page })
+        const toValue = this.state.width * -1 * this.state.page
+        // const toValue = 0
+        Animated.timing(
+            this.state.translate,
+            {
+                toValue: toValue,
+                duration: 1000,
+                useNativeDriver: true
+            }
+        ).start()
+        this.state.translate.setValue(0)
+
+    }
+
     prevPage() {
         let page = this.state.page - 1
         page < 0 ? page = this.state.slideLength : true
@@ -101,29 +142,14 @@ class Slider extends React.Component {
 
         return new StyleSheet.create({
             slider: {
-                backgroundColor: 'yellow',
-                // flex: 1,
+                flex: 1,
                 flexDirection: 'row',
-                // height: 200,
                 width: this.state.width * this.state.slideLength,
-                transform: [{
-                    translateX: translate
-                }],
                 left: this.state.page * -1 * this.state.width,
+                transform: [{ translateX: translate }],
             },
             slide: {
                 width: this.state.width,
-                // height: 200,
-            },
-            content: {
-                backgroundColor: 'white',
-                height: 100
-            },
-            flex1: {
-                flex: 1
-            },
-            flex0: {
-                flex: 0
             },
         })
     }
@@ -131,37 +157,78 @@ class Slider extends React.Component {
     render() {
         const Style = this.getStyle()
         return (
-            <Animated.View {...this._panResponder.panHandlers} style={Style.slider}>
-                <View style={[Style.slide]}>
-                    <Text style={[Style.slide, Style.un]}>0</Text>
-                    <Pager />
-                    <Card>
-                        <View style={[Style.row]}>
-                            <Text >Blablabla</Text>
-                            <Switch />
-                        </View>
-                    </Card>
-                    <Button color="#841584" onPress={() => this.nextPage()} title="Next Slide" />
-                </View>
-                <Text style={[Style.slide, Style.deux]}>1</Text>
-                <Button color="#841584" onPress={() => this.prevPage()} title="Prev Slide" />
-                <Text style={[Style.slide, Style.trois]}>2</Text>
-                <Text style={[Style.slide, Style.quatre]}>3</Text>
-            </Animated.View >
+            <View style={{ flex: 1 }}>
+                <Text style={{ textAlign: 'center' }}>{this.state.page}</Text>
+                <Animated.View {...this._panResponder.panHandlers} style={[Style.slider]}>
+                    <View style={[Style.slide]}>
+                        <Card>
+                            <View style={[Style.row]}>
+                                <Switch />
+                            </View>
+                        </Card>
+                        <Card>
+                            <View style={[Style.row]}>
+                                <Switch />
+                            </View>
+                        </Card>
+                        {/* <Button color="#841584" onPress={() => this.nextPage()} title="Next Slide" /> */}
+                    </View>
+
+
+                    <View style={[Style.slide]}>
+                        <Card>
+                            <View style={[Style.row]}>
+                                {/* <Text >Deuxieme Page</Text> */}
+                                <Switch />
+                            </View>
+                        </Card>
+                        {/* <Button color="#841584" onPress={() => this.prevPageManuel()} title="Prev Slide" />
+                        <Button color="#841584" onPress={() => this.nextPageManuel()} title="Next Slide" /> */}
+                    </View>
+
+
+                    <View style={[Style.slide]}>
+                        <Card>
+                            <View style={[Style.row]}>
+                                {/* <Text>Troisième page</Text> */}
+                                <Switch />
+                            </View>
+                        </Card>
+                        {/* <Button color="#841584" onPress={() => this.prevPageManuel()} title="Prev Slide" />
+                        <Button color="#841584" onPress={() => this.nextPageManuel()} title="Next Slide" /> */}
+                    </View>
+
+                </Animated.View >
+                {/* <Button color="#3B5998" onPress={() => this.nextPage()} title="Next Slide" /> */}
+                <Button color="#3B5998" onPress={() => this.nextPageManuel()} title="Next Slide" />
+                <Button color="#3B5998" onPress={() => this.prevPageManuel()} title="Prev Slide" />
+
+            </View>
         )
     }
 
 }
 
-navigationOptionsSlider = {
-    headerStyle: style.header,
-    headerTitleStyle: style.headerTitle,
-    title: 'Slider',
-}
+// navigationOptionsSlider = {
+//     header: null,
+//     // headerTintColor: 'yellow',
+//     // header: {
+//     //     style: { backgroundColor: 'red' }
+//     // },
+//     // headerStyle: style.header,
+//     // headerStyle: {
+//     //     backgroundColor: style.FacebookBlue,
+//     //     //     // marginTop: StatusBar.currentHeight
+//     // },
+//     // headerTitleStyle: style.headerTitle,
+//     // title: 'Slider',
+// }
 
-export default StackNavigator({
-    Slider: {
-        screen: Slider,
-        navigationOptionsSlider
-    }
-})
+// export default StackNavigator({
+//     Slider: {
+//         screen: Slider,
+//         navigationOptionsSlider,
+//         headerMode: 'none',
+//         header: null,
+//     }
+// })

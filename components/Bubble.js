@@ -1,25 +1,27 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import {
+    View, Text, StyleSheet, ScrollView
+} from 'react-native'
 
 import style from '../Styles'
 import BubbleCercle from './BubbleCercle'
 
 export default class Bubble extends React.Component {
-
     render() {
         return (
-            <View style={[localStyle.content]}>
-                <BubbleCercle></BubbleCercle>
-            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <View style={[localStyle.content]}>
+                    <BubbleCercle></BubbleCercle>
+                </View>
+            </ScrollView>
         )
     }
-
 }
 
 const localStyle = StyleSheet.create({
     content: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
         // paddingTop: 20,
         // paddingBottom: 20,
         // marginBottom: 20,

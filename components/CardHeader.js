@@ -38,6 +38,7 @@ const localStyle = StyleSheet.create({
         marginLeft: 10
     },
     line: {
+        borderRadius: 10,
         marginTop:5,
         width: 120,
         // height: 1,
@@ -45,6 +46,7 @@ const localStyle = StyleSheet.create({
         padding: 10
     },
     lineLite: {
+        borderRadius: 10,
         width: 45,
         // height: 2,
         backgroundColor: 'gainsboro',
