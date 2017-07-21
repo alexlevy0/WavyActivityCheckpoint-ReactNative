@@ -5,13 +5,13 @@ import { StackNavigator } from 'react-navigation'
 import style from '../Styles'
 import Block from './Block'
 
-
-// border={{ width: 1, color: 'red', style: 'red' }}
+// border={{horizontal}}
 class Player extends React.Component {
     render() {
         return (<Block
-            height={50}
+            height={50}  
             color="yellow"
+            border={{ color: 'red', size: 2 }}
         />)
     }
 }

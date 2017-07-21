@@ -28,26 +28,18 @@ const ALLOW_FIELDS = [
     'overflow'
 ]
 
+const ALLOW_FIELDS_BORDER = {
+    color: 'borderColor',
+    size: 'borderWidth',
+    horizontal: 'horizontal',
+}
 
 const ALLOW_FIELDS_OBJS = {
     'color': 'backgroundColor',
-    // 'border-right': border(), //border-width border-style border-color|initial|inherit
-    // 'borderLeftWidth': 'borderLeftWidth',
-    // 'borderRightWidth',
-    // 'borderTopWidth',
-    // 'borderBottomWidth',
     'flex': 'flex',
     'height': 'height',
     'opacity': 'opacity',
     'elevation': 'elevation',
-    // 'paddingRight',
-    // 'paddingLeft',
-    // 'paddingTop',
-    // 'paddingBottom',
-    // 'marginRight',
-    // 'marginLeft',
-    // 'marginTop',
-    // 'marginBottom',
     'position': 'position',
     'top': 'top',
     'right': 'right',
@@ -58,31 +50,25 @@ const ALLOW_FIELDS_OBJS = {
     'overflow': 'overflow',
     'zIndex': 'zIndex',
     'iosdirection': 'iosdirection',
-    'border': (value) => {
-        console.log("----> toBorder : ", value)
-        return value
-        // return {
-        //     'border': value
-        //     // 'elevation': 3
-        //     // 'backgroundColor': 'red'
-        // }
+    'borderBottomColor': 'borderBottomColor',
+    'border': borderAttr => {
+        const allowBorderAttr = _.pick(borderAttr, _.keys(ALLOW_FIELDS_BORDER))
+        return _.mapKeys(allowBorderAttr, (value, key) => ALLOW_FIELDS_BORDER[key])
     },
 }
 
 const blockConfigNew = props => {
+    let dynamiqStyleToApply = {}
     const allowAttr = _.pick(props, _.keys(ALLOW_FIELDS_OBJS))
     const styleToApply = _.mapKeys(allowAttr, (value, key) => {
-        if (typeof ALLOW_FIELDS_OBJS[key] === 'function') {
-            return ALLOW_FIELDS_OBJS[key](value)
-        } else {
+        if (typeof ALLOW_FIELDS_OBJS[key] === 'function')
+            _.assign(dynamiqStyleToApply, ALLOW_FIELDS_OBJS[key](value))
+        else
             return ALLOW_FIELDS_OBJS[key]
-        }
     })
-
-    console.log("----> styleToApply : ", styleToApply)
-    return styleToApply
+    const styleToReturn = _.omit(_.assign(styleToApply, dynamiqStyleToApply),
+        ['undefined'])
+    console.log("styleToReturn--> ", styleToReturn);
+    return styleToReturn
 }
-
 export default blockConfigNew
-// border={{width:1, color; 'red', style:'red'}}
-// border={{horizontal}}
