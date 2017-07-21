@@ -6,7 +6,7 @@ import style from '../Styles'
 import Block from './Block'
 
 
-{/* border={{ width: 1, color: 'red', style: 'red' }} */}
+// border={{ width: 1, color: 'red', style: 'red' }}
 class Player extends React.Component {
     render() {
         return (<Block

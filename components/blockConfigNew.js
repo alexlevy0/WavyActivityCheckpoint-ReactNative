@@ -60,23 +60,26 @@ const ALLOW_FIELDS_OBJS = {
     'iosdirection': 'iosdirection',
     'border': (value) => {
         console.log("----> toBorder : ", value)
-        return {
-            'border': value
-        }
+        return value
+        // return {
+        //     'border': value
+        //     // 'elevation': 3
+        //     // 'backgroundColor': 'red'
+        // }
     },
-
 }
 
 const blockConfigNew = props => {
     const allowAttr = _.pick(props, _.keys(ALLOW_FIELDS_OBJS))
     const styleToApply = _.mapKeys(allowAttr, (value, key) => {
-        typeof ALLOW_FIELDS_OBJS[key] === 'function'
-            ? ALLOW_FIELDS_OBJS[key](value)
-            : ALLOW_FIELDS_OBJS[key]
+        if (typeof ALLOW_FIELDS_OBJS[key] === 'function') {
+            return ALLOW_FIELDS_OBJS[key](value)
+        } else {
+            return ALLOW_FIELDS_OBJS[key]
+        }
     })
 
-
-    console.table("styleToApply : ", styleToApply)
+    console.log("----> styleToApply : ", styleToApply)
     return styleToApply
 }
 
